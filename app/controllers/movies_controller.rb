@@ -8,6 +8,20 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    
+    if (params[:ratings])      ## Checking for selection in tick boxes
+      session[:ratings] = params[:ratings]  
+      @ratings = params[:ratings].keys
+    
+    elsif (session[:ratings])   ### Remembering the sessions' selection
+      params[:ratings] = session[:ratings]
+      @ratings = session[:ratings].keys
+      
+    else
+      @ratings = @all_ratings
+      
+    end
+    
     if (params[:sort])
       session[:sort]=params[:sort]
       @sort = params[:sort]
@@ -16,6 +30,7 @@ class MoviesController < ApplicationController
       @sort = session[:sort]
     end
     @movies.merge!(Movie.order(@sort))   ## sort according to parameter clicked
+    @movies=Movie.where(rating: @ratings)
   end
 
   def new
