@@ -29,8 +29,10 @@ class MoviesController < ApplicationController
       params[:sort]=session[:sort]
       @sort = session[:sort]
     end
+    
     @movies.merge!(Movie.order(@sort))   ## sort according to parameter clicked
     @movies=Movie.where(rating: @ratings)
+    
   end
 
   def new
