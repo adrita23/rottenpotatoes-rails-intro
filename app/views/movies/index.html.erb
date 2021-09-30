@@ -4,7 +4,7 @@
 <%#  Part 1: Start here... %>
 <%= form_tag movies_path, :method => :get, :id => 'ratings_form' do %>
   <% @allTypesOfRatings.each do |rating| %>
-    <%= check_box_tag "ratings[#{rating[0]}]", 1, @ratings.keys.include?(rating[0]), :id=>"ratings_#{rating[0]}" -%>
+    <%= check_box_tag "ratings[#{rating[0]}]", 1, @ratings.keys.include?(rating[0]), :id=>"ratings_#{rating[0]}" %>
     <%= rating[0] -%>
   <% end %>
   <%= submit_tag 'Refresh', :id => 'ratings_submit', :class => 'btn btn-primary' %>
